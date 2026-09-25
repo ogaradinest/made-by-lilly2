@@ -1,0 +1,70 @@
+[
+  {
+    "slug": "plum-orchard-shawl",
+    "name": "Plum Orchard Shawl",
+    "type": "Shawl",
+    "price": 185,
+    "material": "Wool blend",
+    "colour": "Plum, coral & saffron",
+    "care": "Gentle hand wash in cool water, then dry flat.",
+    "image": "plum-orchard-shawl",
+    "alt": "Plum Orchard Shawl, a triangular hand-crocheted shawl fading from deep plum through coral to saffron, draped over a linen armchair",
+    "summary": "Deep plum melting into coral and saffron, like the last warm hour of an orchard evening.",
+    "description": [
+      "The Plum Orchard Shawl starts in a deep, inky plum at its neckline and warms, row by row, into coral and then saffron at its edge. The open mesh keeps it light enough to wear indoors, while the wool blend holds the warmth on cooler evenings.",
+      "It is finished with a firm picot-style border in plum, so the colour story closes where it began. Wear it wrapped at the throat like a scarf, or let the point fall down your back over a simple dress."
+    ],
+    "stripe": "https://buy.stripe.com/5kQcMYaOAc6V0wl7VJbjW06"
+  },
+  {
+    "slug": "cloverline-alignment-shawl",
+    "name": "Cloverline Alignment Shawl",
+    "type": "Shawl",
+    "price": 135,
+    "material": "Wool blend",
+    "colour": "Natural silver grey",
+    "size": "Approx. 200 × 50 cm",
+    "care": "Gentle hand wash and dry flat.",
+    "image": "cloverline-alignment-shawl",
+    "alt": "Cloverline Alignment Shawl, a long rectangular crochet shawl in natural silver-grey wool with rows of clover-shaped stitches, draped over a garden chair in sunlight",
+    "summary": "Quiet silver-grey, sculpted with rows of tiny clovers. The one you will reach for every day.",
+    "description": [
+      "A generous rectangular shawl worked in the alignment shamrocks stitch: repeating clover forms create a gentle, sculpted texture across its natural silver-grey surface.",
+      "At roughly two metres long, it is long enough to wrap twice around the shoulders or loop loosely as an oversized scarf. The neutral colour sits happily with almost anything in your wardrobe."
+    ],
+    "instagram": "https://www.instagram.com/reel/DbQWJsKMMc0/",
+    "stripe": "https://buy.stripe.com/8x2cMY5ug0od4MBfobbjW07"
+  },
+  {
+    "slug": "sunlit-hearth-scarf",
+    "name": "Sunlit Hearth Scarf",
+    "type": "Oversized scarf",
+    "price": 145,
+    "material": "Wool blend",
+    "colour": "Saffron, moss & plum",
+    "care": "Gentle hand wash in cool water, then dry flat.",
+    "image": "sunlit-hearth-scarf",
+    "alt": "Sunlit Hearth Scarf, an oversized crochet scarf in stripes of saffron, moss green, coral and plum, folded on a linen cloth on a wooden table",
+    "summary": "Saffron, moss and plum in chunky open stripes. Made for wrapping, looping and layering.",
+    "description": [
+      "The Sunlit Hearth Scarf is long and generous, built from bands of saffron, moss green, coral and plum. The stripes alternate between solid rows and open windows, so the fabric has real texture when it drapes.",
+      "It is longer and narrower than a shawl, so it wraps and loops easily over a winter coat, and it is warm enough to be the one colourful thing you wear all season."
+    ]
+  },
+  {
+    "slug": "coral-tide-shawl",
+    "name": "Coral Tide Shawl",
+    "type": "Shawl",
+    "price": 210,
+    "material": "Fine wool blend",
+    "colour": "Coral, oat & plum",
+    "care": "Gentle hand wash in cool water, then dry flat.",
+    "image": "lilly-hero",
+    "alt": "Coral Tide Shawl, a large triangular hand-crocheted shawl in plum with bands of coral and saffron, worn over a cream linen dress",
+    "summary": "A large triangle in plum with rippling bands of coral and gold. Now in the archive.",
+    "description": [
+      "The Coral Tide Shawl was a large triangular piece, generous enough to cowl at the neck and still reach the elbows. Bands of coral and gold ripple through a plum ground, finished with a lacy scalloped edge.",
+      "This piece has found its home. It stays here in the archive as a record of the work."
+    ]
+  }
+]

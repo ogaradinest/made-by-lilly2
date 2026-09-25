@@ -1,0 +1,8 @@
+_site/
+src-images/
+node_modules/
+.claude/
+*.xlsx
+*.xls
+*.csv
+.env
