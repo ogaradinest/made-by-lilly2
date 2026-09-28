@@ -66,19 +66,6 @@
     window.matchMedia("(min-width: 901px)").addEventListener("change", (m) => { if (m.matches) setOpen(false); });
   }
 
-  // Copy email address.
-  document.querySelectorAll("[data-copy]").forEach((btn) => {
-    const status = document.querySelector("[data-copy-status]");
-    btn.addEventListener("click", async () => {
-      try {
-        await navigator.clipboard.writeText(btn.dataset.copy);
-        if (status) status.textContent = "Copied. Paste it into any email app.";
-      } catch {
-        if (status) status.textContent = `The address is ${btn.dataset.copy}`;
-      }
-    });
-  });
-
   // Keep only one FAQ answer open at a time.
   const faqs = document.querySelectorAll(".faq__item");
   faqs.forEach((d) => d.addEventListener("toggle", () => {

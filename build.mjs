@@ -810,16 +810,11 @@ ${pageHead({ crumbsHtml: c.html, eyebrow: "Contact", title: `Say <em>hello.</em>
 <section class="contact">
   <div class="contact__card" data-reveal>
     <p class="eyebrow">Email</p>
-    <p class="contact__email">${site.email.replace("@", "<wbr>@")}</p>
-    <div class="contact__actions">
-      <a class="btn" href="${mailto("Hello from the website")}">Email me</a>
-      <button class="btn btn--ghost" type="button" data-copy="${esc(site.email)}">Copy address</button>
-    </div>
-    <p class="contact__status" role="status" aria-live="polite" data-copy-status></p>
+    <a class="btn btn--oval" href="${mailto("Hello from the website")}">Email Me</a>
   </div>
   <div class="contact__side" data-reveal style="--d:1">
-    <p class="eyebrow">Elsewhere</p>
-    <a class="contact__insta" href="${site.instagram}" target="_blank" rel="noopener">Instagram <em>${site.instagramHandle}</em> ↗</a>
+    <p class="eyebrow">Instagram</p>
+    <a class="contact__insta" href="${site.instagram}" target="_blank" rel="noopener" aria-label="Lilly on Instagram (opens in a new tab)"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.4" cy="6.6" r="1.2" fill="currentColor"/></svg></a>
     <p>New pieces, works in progress and event dates are shared there first.</p>
   </div>
 </section>
@@ -880,7 +875,7 @@ function legal() {
     sections: [
       { id: "who", h: "Who I am", html: `<p>Made by Lilly is a small handmade business in the UK and is the controller of the personal data described here. You can contact me about anything in this policy at ${email}.</p>` },
       { id: "what", h: "What I collect and why", html: `<ul><li><strong>Orders.</strong> When you buy, Stripe collects your name, email, delivery address and payment details so the payment can be taken and the piece delivered. I receive your name, email and delivery address to post your order. I never see or store your card details. The legal basis is contract: I need this to fulfil your order.</li><li><strong>Emails.</strong> If you email me, I receive your email address and anything you choose to include, so I can reply. The legal basis is my legitimate interest in answering your question, or contract if it's about an order.</li></ul><h3>Analytics</h3>${analytics}` },
-      { id: "who-else", h: "Who else handles your data", html: `<ul><li><strong>Stripe</strong> processes payments. Stripe is an independent controller for payment data, and its own privacy policy applies.</li><li><strong>Google</strong> hosts my email (Gmail)${site.ga4Id ? " and provides Google Analytics, only if you consent" : ""}.</li><li><strong>GitHub</strong> hosts this website. Like any web host, it may process technical data such as your IP address to deliver pages securely.</li><li><strong>Royal Mail or another UK courier</strong> receives your name and address to deliver your order.</li></ul><p>I never sell your data, and I don't use it for marketing unless you've asked me to.</p>` },
+      { id: "who-else", h: "Who else handles your data", html: `<ul><li><strong>Stripe</strong> processes payments. Stripe is an independent controller for payment data, and its own privacy policy applies.</li><li><strong>Microsoft</strong> hosts my email (Outlook).</li>${site.ga4Id ? "<li><strong>Google</strong> provides Google Analytics, only if you consent.</li>" : ""}<li><strong>GitHub</strong> hosts this website. Like any web host, it may process technical data such as your IP address to deliver pages securely.</li><li><strong>Royal Mail or another UK courier</strong> receives your name and address to deliver your order.</li></ul><p>I never sell your data, and I don't use it for marketing unless you've asked me to.</p>` },
       { id: "keep", h: "How long I keep it", html: `<p>I keep order details and email correspondence for ${site.dataRetention}, then delete them. Stripe keeps its own payment records as required by financial regulations.</p>` },
       { id: "rights", h: "Your rights", html: `<p>You have the right to ask for a copy of your data, to have it corrected or deleted, to object to or restrict how it's used, and to withdraw consent at any time. Just email ${email}. I'll respond within one month.</p>` },
       { id: "complain", h: "How to complain", html: `<p>If you're unhappy with how your data has been handled, please tell me first so I can put it right. You also have the right to complain to the Information Commissioner's Office (ICO), the UK's data protection regulator, at <a href="https://ico.org.uk/make-a-complaint/" target="_blank" rel="noopener">ico.org.uk/make-a-complaint</a> or on 0303 123 1113.</p>` },
