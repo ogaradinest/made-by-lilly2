@@ -127,7 +127,7 @@ function header(active) {
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="masthead" data-masthead>
   <div class="masthead__inner">
-    <a class="logo" href="${url("/")}"><img src="${url("/images/logo-160.png")}" width="64" height="64" alt="${site.name}, home"></a>
+    <a class="logo" href="${url("/")}"><img src="${url("/images/logo-400.png")}" srcset="${url("/images/logo-160.png")} 160w, ${url("/images/logo-400.png")} 400w" sizes="(min-width: 901px) 250px, 96px" width="250" height="250" alt="${site.name}, home" fetchpriority="high"></a>
     <nav class="nav" aria-label="Main"><ul>${links}</ul></nav>
     <a class="masthead__cta" href="${url("/shop/")}">The collection <span aria-hidden="true">→</span></a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
@@ -135,6 +135,7 @@ function header(active) {
     </button>
   </div>
 </header>
+<div class="masthead-spacer" aria-hidden="true"></div>
 <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
   <nav aria-label="Mobile"><ul>${mobile}</ul></nav>
   <div class="mobile-menu__foot">
@@ -275,6 +276,10 @@ function statusTag(p) {
   return p.sold ? `<span class="tag tag--sold">In the archive</span>` : `<span class="tag">One of a kind</span>`;
 }
 
+// Where "Buy" goes: the Stripe Payment Link once it exists, otherwise an email to Lilly.
+const buyHref = (p) => p.stripe || mailto(`I'd like to buy ${p.name}`);
+const buyAttrs = (p) => (p.stripe ? ` rel="noopener"` : "");
+
 function productCard(p, { size = "", sizes = "(min-width: 900px) 45vw, 100vw" } = {}) {
   return `<article class="piece ${size} ${p.sold ? "is-sold" : ""}" data-category="${esc(p.category)}" data-reveal>
   <a class="piece__link" href="${url(`/shop/${p.slug}/`)}">
@@ -286,6 +291,7 @@ function productCard(p, { size = "", sizes = "(min-width: 900px) 45vw, 100vw" } 
       <p class="piece__row"><span>${esc(p.cardFacts)}</span><b>${p.sold ? "Sold" : price(p.price)}</b></p>
     </div>
   </a>
+  ${p.sold ? "" : `<a class="btn btn--card" href="${buyHref(p)}"${buyAttrs(p)} aria-label="Buy ${esc(p.name)}, ${price(p.price)}">Buy</a>`}
 </article>`;
 }
 
@@ -511,7 +517,7 @@ function productPage(p) {
   } else if (p.stripe) {
     action = `<div class="buy"><a class="btn btn--buy" href="${p.stripe}" rel="noopener">Buy now · ${price(p.price)}</a><p class="buy__secure"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 10V7a6 6 0 1 1 12 0v3h1v11H5V10h1zm2 0h8V7a4 4 0 1 0-8 0v3z"/></svg>Secure checkout with Stripe</p></div>`;
   } else {
-    action = `<div class="buy"><a class="btn btn--buy" href="${mailto(`I'd like to buy ${p.name}`)}">Buy · ${price(p.price)}</a><p class="buy__secure">Online checkout for this piece is coming soon. Email me and I'll send you a secure payment link.</p></div>`;
+    action = `<div class="buy"><a class="btn btn--buy" href="${buyHref(p)}">Buy · ${price(p.price)}</a><p class="buy__secure">Online checkout for this piece is coming soon. Email me and I'll send you a secure payment link.</p></div>`;
   }
   const rows = [...p.details, ["Care", p.care], ["Delivery", `Free UK delivery, dispatched ${site.dispatch}`]];
   const body = `
@@ -525,6 +531,7 @@ function productPage(p) {
     <h1 class="product__title" data-reveal>${esc(p.name)}</h1>
     <p class="product__subtitle" data-reveal>${esc(p.subtitle)}</p>
     <p class="product__price" data-reveal>${p.sold ? `<s>${price(p.price)}</s> <span>Sold</span>` : `${price(p.price)} <span>incl. UK delivery</span>`}</p>
+    ${p.sold ? "" : `<p class="product__buy-top" data-reveal><a class="btn" href="${buyHref(p)}"${buyAttrs(p)}>Buy</a></p>`}
     <ul class="product__tags" data-reveal>
       <li>${p.sold ? "In the archive" : "One of a kind"}</li>
       <li>Ready-made</li>
