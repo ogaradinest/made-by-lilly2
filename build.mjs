@@ -1,4 +1,4 @@
-// Made by Lilly — static site generator.
+// Handmade by Lilly — static site generator.
 // Reads everything in /content, writes a finished static site to /_site.
 // No dependencies: run with `node build.mjs`.
 
@@ -14,11 +14,14 @@ const OUT = path.join(ROOT, "_site");
 const site = readJson("site.json");
 const stock = readJson("stock.json");
 const events = readJson("events.json");
-const products = readJson("products.json").map((p, i) => ({
+// Products marked "draft": true stay in the data file but are left off the site entirely.
+const products = readJson("products.json").filter((p) => !p.draft).map((p, i) => ({
   ...p,
   no: String(i + 1).padStart(2, "0"),
   sold: stock[p.slug] !== "available",
+  detail: (label) => (p.details.find(([k]) => k === label) || [])[1],
 }));
+const CATEGORIES = [...new Set(products.map((p) => p.category))];
 const BUILD_VERSION = Date.now().toString(36);
 const sitemap = [];
 
@@ -124,7 +127,7 @@ function header(active) {
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="masthead" data-masthead>
   <div class="masthead__inner">
-    <a class="wordmark" href="${url("/")}" aria-label="${site.name}, home">Made by <em>Lilly</em></a>
+    <a class="logo" href="${url("/")}"><img src="${url("/images/logo-160.png")}" width="64" height="64" alt="${site.name}, home"></a>
     <nav class="nav" aria-label="Main"><ul>${links}</ul></nav>
     <a class="masthead__cta" href="${url("/shop/")}">The collection <span aria-hidden="true">→</span></a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
@@ -182,14 +185,14 @@ function footer() {
     </div>
   </div>
   <div class="footer__base">
-    <a class="wordmark wordmark--light" href="${url("/")}">Made by <em>Lilly</em></a>
+    <a class="logo logo--footer" href="${url("/")}"><img src="${url("/images/logo-400.png")}" width="120" height="120" alt="${site.name}, home" loading="lazy"></a>
     <ul class="footer__legal">
       <li><a href="${url("/terms-of-sale/")}">Terms of sale</a></li>
       <li><a href="${url("/privacy/")}">Privacy</a></li>
       <li><a href="${url("/cookies/")}">Cookies</a></li>
       ${ga}
     </ul>
-    <p class="footer__meta">© ${new Date().getFullYear()} Made by Lilly · Handmade in the UK · UK delivery only</p>
+    <p class="footer__meta">© ${new Date().getFullYear()} ${site.name} · Made in the UK · UK delivery only</p>
     <p class="footer__credit">Site by <span>otobrothers</span></p>
   </div>
 </footer>`;
@@ -219,7 +222,8 @@ function layout({ title, description, path: p, body, active = "", image = "lilly
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#FBF6EE">
-<link rel="icon" href="${url("/favicon.svg")}" type="image/svg+xml">
+<link rel="icon" href="${url("/favicon.png")}" type="image/png">
+<link rel="apple-touch-icon" href="${url("/apple-touch-icon.png")}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=DM+Serif+Display:ital@0;1&family=Italiana&display=swap">
@@ -272,14 +276,14 @@ function statusTag(p) {
 }
 
 function productCard(p, { size = "", sizes = "(min-width: 900px) 45vw, 100vw" } = {}) {
-  return `<article class="piece ${size} ${p.sold ? "is-sold" : ""}" data-reveal>
+  return `<article class="piece ${size} ${p.sold ? "is-sold" : ""}" data-category="${esc(p.category)}" data-reveal>
   <a class="piece__link" href="${url(`/shop/${p.slug}/`)}">
-    <div class="piece__media">${img(p.image, p.alt, { sizes })}${statusTag(p)}</div>
+    <div class="piece__media">${img(p.images[0].file, p.images[0].alt, { sizes })}${statusTag(p)}</div>
     <div class="piece__meta">
-      <span class="piece__no">No. ${p.no}</span>
+      <span class="piece__no">No. ${p.no} · ${esc(p.category)}</span>
       <h3 class="piece__name">${esc(p.name)}</h3>
-      <p class="piece__summary">${esc(p.summary)}</p>
-      <p class="piece__row"><span>${esc(p.type)} · ${esc(p.material)}</span><b>${p.sold ? "Sold" : price(p.price)}</b></p>
+      <p class="piece__summary">${esc(p.cardLine)}</p>
+      <p class="piece__row"><span>${esc(p.cardFacts)}</span><b>${p.sold ? "Sold" : price(p.price)}</b></p>
     </div>
   </a>
 </article>`;
@@ -289,11 +293,12 @@ const productLd = (p) => ({
   "@type": "Product",
   name: p.name,
   description: p.description.join(" "),
-  image: imgAbs(p.image),
+  image: p.images.map((i) => imgAbs(i.file)),
   url: abs(`/shop/${p.slug}/`),
   brand: { "@type": "Brand", name: site.name },
-  material: p.material,
-  color: p.colour,
+  category: p.category,
+  material: p.detail("Material"),
+  color: p.detail("Colour"),
   offers: {
     "@type": "Offer",
     price: String(p.price),
@@ -321,7 +326,7 @@ const faqs = [
   ["Is every piece really one of a kind?", "Yes. Each finished piece has its own combination of fibre, colour, stitch and hand-finished details. When a piece sells, it is not remade exactly."],
   ["What is the difference between a shawl and an oversized scarf?", "A shawl is designed to drape across the shoulders. An oversized scarf is longer and narrower, made for wrapping, looping and layering."],
   ["How much is delivery?", `Nothing extra. UK delivery is included in every price, and orders are dispatched ${site.dispatch}.`],
-  ["Do you deliver outside the UK?", "Not at the moment. Made by Lilly delivers within the UK only."],
+  ["Do you deliver outside the UK?", "Not at the moment. Handmade by Lilly delivers within the UK only."],
   ["Can I return a piece?", "Yes. You have 14 days from delivery to change your mind, and return postage is on me. Your refund is made within 14 days of the piece arriving back with me."],
   ["How do I care for a hand-crocheted shawl?", "Gentle hand washing in cool water and drying flat keeps handmade crochet in shape. There is a full care guide in the journal."],
   ["How do I pay?", "Checkout is handled securely by Stripe. I never see or store your card details."],
@@ -340,7 +345,7 @@ function home() {
       <span class="mask"><span data-line style="--d:0">From my hands</span></span>
       <span class="mask"><span data-line style="--d:1">to your <em>heart.</em></span></span>
     </h1>
-    <p class="hero__lede" data-reveal style="--d:3">One-of-a-kind shawls and oversized scarves, made slowly, one stitch at a time. Each piece exists once, and then it's yours.</p>
+    <p class="hero__lede" data-reveal style="--d:3">One-of-a-kind shawls and oversized scarves, made slowly, one stitch at a time. Each piece exists once, make sure it's yours.</p>
     <div class="hero__actions" data-reveal style="--d:4">
       <a class="btn" href="${url("/shop/")}">Shop the collection</a>
       <a class="link-line" href="${url("/about/")}">Meet Lilly <span aria-hidden="true">→</span></a>
@@ -368,7 +373,7 @@ function home() {
 
 <div class="marquee" aria-hidden="true">
   <div class="marquee__track">
-    ${Array.from({ length: 2 }, () => `<span>Shawls</span><i>✦</i><span><em>Oversized scarves</em></span><i>✦</i><span>One of a kind</span><i>✦</i><span><em>From my hands to your heart</em></span><i>✦</i><span>Free UK delivery</span><i>✦</i>`).join("")}
+    ${Array.from({ length: 2 }, () => `<span>Shawls</span><i>✦</i><span><em>Wraps</em></span><i>✦</i><span>Scarves</span><i>✦</i><span>One of a kind</span><i>✦</i><span><em>From my hands to your heart</em></span><i>✦</i><span>Free UK delivery</span><i>✦</i>`).join("")}
   </div>
 </div>
 
@@ -398,12 +403,12 @@ function home() {
   <div class="story__copy">
     <p class="eyebrow eyebrow--light" data-reveal>About Lilly</p>
     <h2 class="display-md" data-reveal>Every stitch has a little more <em>to say.</em></h2>
-    <p data-reveal>Made by Lilly is a small, personal crochet practice built around slow making. A handmade variation isn't a flaw to be ironed out. It's the point. Every piece carries its own texture, drape and character.</p>
+    <p data-reveal>Handmade by Lilly is a small, personal crochet practice built around slow making. A handmade variation isn't a flaw to be ironed out. It's the point. Every piece carries its own texture, drape and character.</p>
     <a class="link-line link-line--light" href="${url("/about/")}" data-reveal>Read Lilly's story <span aria-hidden="true">→</span></a>
   </div>
 </section>
 
-<section class="promises" aria-label="Shopping with Made by Lilly">
+<section class="promises" aria-label="Shopping with Handmade by Lilly">
   <ol>
     <li data-reveal><span class="promises__no">i.</span><h3>One of a kind</h3><p>Every piece is made once. When it's gone, it moves to the archive.</p></li>
     <li data-reveal style="--d:1"><span class="promises__no">ii.</span><h3>Free UK delivery</h3><p>Postage is included in the price. What you see is what you pay.</p></li>
@@ -451,7 +456,7 @@ function home() {
     bodyClass: "page-home",
     jsonLd: [
       { "@type": "WebSite", name: site.name, url: abs("/") },
-      { "@type": "Organization", name: site.name, url: abs("/"), email: site.email, sameAs: [site.instagram], logo: abs("/favicon.svg") },
+      { "@type": "Organization", name: site.name, url: abs("/"), email: site.email, sameAs: [site.instagram], logo: abs("/images/logo-400.png") },
     ],
   }));
 }
@@ -460,23 +465,34 @@ function shop() {
   const c = crumbs([{ label: "Home", href: "/" }, { label: "Shop", href: "/shop/" }]);
   const ordered = [...products.filter((p) => !p.sold), ...products.filter((p) => p.sold)];
   const available = products.filter((p) => !p.sold).length;
+  const count = (cat) => products.filter((p) => p.category === cat).length;
   const body = `
 ${pageHead({
   crumbsHtml: c.html,
   eyebrow: `${available} piece${available === 1 ? "" : "s"} available`,
   title: `The <em>collection.</em>`,
-  lede: "Shawls and oversized scarves, each made once, by hand. UK delivery is included in every price, and you have 14 days to change your mind.",
+  lede: `${CATEGORIES.join(", ").replace(/, ([^,]*)$/, " and $1")}, each made once, by hand. UK delivery is included in every price, and you have 14 days to change your mind.`,
 })}
-<section class="shop-grid">
-  ${ordered.map((p, i) => productCard(p, { size: i % 3 === 0 ? "piece--lead" : "", sizes: "(min-width: 900px) 50vw, 100vw" })).join("\n")}
+<div class="shop-filter" data-shop-filter hidden>
+  <label for="shop-category">Show</label>
+  <div class="shop-filter__select">
+    <select id="shop-category">
+      <option value="">All pieces (${products.length})</option>
+      ${CATEGORIES.map((cat) => `<option value="${esc(cat)}">${esc(cat)} (${count(cat)})</option>`).join("")}
+    </select>
+  </div>
+  <p class="shop-filter__status" role="status" aria-live="polite" data-shop-status></p>
+</div>
+<section class="shop-grid" data-shop-grid>
+  ${ordered.map((p) => productCard(p, { sizes: "(min-width: 900px) 50vw, 100vw" })).join("\n")}
 </section>
 <section class="shop-note">
   ${chain()}
   <p data-reveal>Looking for something you saw at a craft fair, or a colour you don't see here? <a href="${mailto("A question about a piece")}">Email me</a> and I'll let you know what's on the hook.</p>
 </section>`;
   write("/shop/", layout({
-    title: `Shop hand-crocheted shawls & oversized scarves | ${site.name}`,
-    description: "Browse every Made by Lilly piece: one-of-a-kind hand-crocheted shawls and oversized scarves in wool blends, with free UK delivery and 14-day returns.",
+    title: `Shop handmade crochet shawls, wraps & scarves | ${site.name}`,
+    description: "Browse every Handmade by Lilly piece: one-of-a-kind handmade crochet shawls, wraps and scarves in wool, merino and cashmere, with free UK delivery and 14-day returns.",
     path: "/shop/",
     active: "shop",
     body,
@@ -486,32 +502,28 @@ ${pageHead({
 
 function productPage(p) {
   const c = crumbs([{ label: "Home", href: "/" }, { label: "Shop", href: "/shop/" }, { label: p.name, href: `/shop/${p.slug}/` }]);
-  const others = products.filter((o) => o.slug !== p.slug && !o.sold).slice(0, 3);
+  // Suggest pieces from the same category first, then anything else that's available.
+  const pool = products.filter((o) => o.slug !== p.slug && !o.sold);
+  const others = [...pool.filter((o) => o.category === p.category), ...pool.filter((o) => o.category !== p.category)].slice(0, 3);
   let action;
   if (p.sold) {
-    action = `<div class="buy buy--sold"><p><strong>This piece has found its home.</strong> Every piece is made once, so this one won't be remade exactly, but something similar may be on the hook.</p><a class="btn btn--ghost" href="${mailto(`Something like the ${p.name}`)}">Ask about something similar</a></div>`;
+    action = `<div class="buy buy--sold"><p><strong>This piece has found its home.</strong> Every piece is made once, so this one won't be remade exactly, but something similar may be on the hook.</p><a class="btn btn--ghost" href="${mailto(`Something like ${p.name}`)}">Ask about something similar</a></div>`;
   } else if (p.stripe) {
     action = `<div class="buy"><a class="btn btn--buy" href="${p.stripe}" rel="noopener">Buy now · ${price(p.price)}</a><p class="buy__secure"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 10V7a6 6 0 1 1 12 0v3h1v11H5V10h1zm2 0h8V7a4 4 0 1 0-8 0v3z"/></svg>Secure checkout with Stripe</p></div>`;
   } else {
-    action = `<div class="buy"><a class="btn btn--buy" href="${mailto(`I'd like to buy the ${p.name}`)}">Email to buy · ${price(p.price)}</a><p class="buy__secure">Online checkout for this piece is coming soon. Email me and I'll send you a secure payment link.</p></div>`;
+    action = `<div class="buy"><a class="btn btn--buy" href="${mailto(`I'd like to buy ${p.name}`)}">Buy · ${price(p.price)}</a><p class="buy__secure">Online checkout for this piece is coming soon. Email me and I'll send you a secure payment link.</p></div>`;
   }
-  const rows = [
-    ["Type", p.type],
-    ["Fibre", p.material],
-    ["Colours", p.colour],
-    p.size && ["Size", p.size],
-    ["Care", p.care],
-    ["Delivery", `Free UK delivery, dispatched ${site.dispatch}`],
-  ].filter(Boolean);
+  const rows = [...p.details, ["Care", p.care], ["Delivery", `Free UK delivery, dispatched ${site.dispatch}`]];
   const body = `
 <div class="product-top">${c.html}</div>
 <article class="product">
   <div class="product__media">
-    <figure class="product__figure" data-reveal>${img(p.image, p.alt, { sizes: "(min-width: 900px) 55vw, 100vw", eager: true })}</figure>
+    ${p.images.map((im, i) => `<figure class="product__figure" data-reveal>${img(im.file, im.alt, { sizes: "(min-width: 900px) 55vw, 100vw", eager: i === 0 })}</figure>`).join("\n    ")}
   </div>
   <div class="product__info">
-    <p class="eyebrow" data-reveal>No. ${p.no} · ${esc(p.type)}</p>
+    <p class="eyebrow" data-reveal>No. ${p.no} · ${esc(p.category)}</p>
     <h1 class="product__title" data-reveal>${esc(p.name)}</h1>
+    <p class="product__subtitle" data-reveal>${esc(p.subtitle)}</p>
     <p class="product__price" data-reveal>${p.sold ? `<s>${price(p.price)}</s> <span>Sold</span>` : `${price(p.price)} <span>incl. UK delivery</span>`}</p>
     <ul class="product__tags" data-reveal>
       <li>${p.sold ? "In the archive" : "One of a kind"}</li>
@@ -519,16 +531,19 @@ function productPage(p) {
       <li>Handmade in the UK</li>
     </ul>
     <div class="product__desc" data-reveal>${p.description.map((d) => `<p>${esc(d)}</p>`).join("")}</div>
+    ${p.closing ? `<p class="product__closing" data-reveal>${esc(p.closing)}</p>` : ""}
     <div data-reveal>${action}</div>
     ${p.sold ? "" : `<aside class="notice" data-reveal>
       <p class="notice__title">Ready-made piece: your right to cancel</p>
       <p>This piece is finished and ready to post, so the standard 14-day cancellation right applies. If it's not for you, let me know within 14 days of delivery and send it back. <strong>Return postage is on me.</strong> Your refund is made within 14 days of the piece arriving back. <a href="${url("/terms-of-sale/#returns")}">Full returns policy</a></p>
     </aside>`}
-    <dl class="specs" data-reveal>${rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>
+    <h2 class="specs__title" data-reveal>Product details</h2>
+    <dl class="specs" data-reveal>${rows.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>
     <div class="product__links" data-reveal>
       ${p.instagram ? `<a class="link-line" href="${p.instagram}" target="_blank" rel="noopener">Watch it move on Instagram ↗</a>` : ""}
-      <a class="link-line" href="${mailto(`A question about the ${p.name}`)}">Ask about this piece <span aria-hidden="true">→</span></a>
+      <a class="link-line" href="${mailto(`A question about ${p.name}`)}">Ask about this piece <span aria-hidden="true">→</span></a>
     </div>
+    <p class="product__signoff" data-reveal>${esc(site.productSignOff)}</p>
   </div>
 </article>
 ${others.length ? `<section class="more">
@@ -536,13 +551,12 @@ ${others.length ? `<section class="more">
   <div class="section-head"><h2 class="display-md" data-reveal>More <em>pieces.</em></h2><a class="link-line" href="${url("/shop/")}" data-reveal>The whole collection <span aria-hidden="true">→</span></a></div>
   <div class="more__grid">${others.map((o) => productCard(o, { sizes: "(min-width: 900px) 30vw, 100vw" })).join("")}</div>
 </section>` : ""}`;
-  const typeWord = p.type.toLowerCase();
   write(`/shop/${p.slug}/`, layout({
-    title: `${p.name}, hand-crocheted ${typeWord} in ${p.colour.toLowerCase()} | ${site.name}`,
-    description: `${p.sold ? "Archive: " : ""}${p.name}, a one-of-a-kind hand-crocheted ${typeWord} in ${p.material.toLowerCase()}, ${p.colour.toLowerCase()}. ${p.sold ? "This piece has sold." : `${price(p.price)} with free UK delivery and 14-day returns.`}`,
+    title: `${p.name}, ${p.subtitle} | ${site.name}`,
+    description: p.sold ? `Archive: ${p.metaDescription} This piece has now sold.` : p.metaDescription,
     path: `/shop/${p.slug}/`,
     active: "shop",
-    image: p.image,
+    image: p.images[0].file,
     type: "product",
     body,
     bodyClass: "page-product",
@@ -558,7 +572,7 @@ function about() {
     ${c.html}
     <p class="eyebrow" data-reveal>About Lilly</p>
     <h1 class="page-head__title" data-reveal>The hands behind <em>the stitches.</em></h1>
-    <p class="page-head__lede" data-reveal>Made by Lilly is one person, a hook, and a basket of yarn that is always slightly too full.</p>
+    <p class="page-head__lede" data-reveal>Handmade by Lilly is one person, a hook, and a basket of yarn that is always slightly too full.</p>
   </div>
   <figure class="about-hero__media" data-reveal>
     ${img("lilly-hero", "Lilly's triangular crochet shawl in plum, coral and saffron, worn by a window in soft daylight", { sizes: "(min-width: 900px) 45vw, 100vw", eager: true })}
@@ -566,7 +580,7 @@ function about() {
 </section>
 <section class="prose-wide">
   <div class="dropcap" data-reveal>
-    <p>Every Made by Lilly piece starts the same way: with a colour that won't leave me alone. A plum I saw in an orchard, the gold of a late afternoon, the grey of a sea that can't decide what it wants to be. From there it becomes a question of yarn, of stitch, and of patience.</p>
+    <p>Every Handmade by Lilly piece starts the same way: with a colour that won't leave me alone. A plum I saw in an orchard, the gold of a late afternoon, the grey of a sea that can't decide what it wants to be. From there it becomes a question of yarn, of stitch, and of patience.</p>
     <p>I work slowly and on purpose. A shawl can take many evenings to make, and I would rather make one piece I'm proud of than ten I'm not. The small variations you'll find in a handmade piece aren't mistakes to be hidden. They're the record of the time and the hands that made it.</p>
     <p>Each finished piece is made once. When it sells, it moves to the archive, and the next one will be different. That's the promise behind everything here: <em>from my hands to your heart.</em></p>
   </div>
@@ -585,7 +599,7 @@ function about() {
 </section>`;
   write("/about/", layout({
     title: `About Lilly, the maker behind the stitches | ${site.name}`,
-    description: "Meet Lilly, the UK crochet maker behind Made by Lilly: why every shawl and scarf is made slowly, made once and made to be worn, from my hands to your heart.",
+    description: "Meet Lilly, the UK crochet maker behind Handmade by Lilly: why every shawl and scarf is made slowly, made once and made to be worn, from my hands to your heart.",
     path: "/about/",
     active: "about",
     body,
@@ -618,7 +632,7 @@ ${pageHead({ crumbsHtml: c.html, eyebrow: "Resources", title: `Learn, read &amp;
 </section>`;
   write("/resources/", layout({
     title: `Crochet resources: guides, journal, stitch library & events | ${site.name}`,
-    description: "Crochet pattern guides, a journal from the studio, a stitch library of techniques and upcoming events, from UK maker Made by Lilly.",
+    description: "Crochet pattern guides, a journal from the studio, a stitch library of techniques and upcoming events, from UK maker Handmade by Lilly.",
     path: "/resources/",
     active: "resources",
     body,
@@ -638,12 +652,12 @@ function blogPages() {
   </a>`;
   write("/resources/blog/", layout({
     title: `Journal: crochet care, styling & studio notes | ${site.name}`,
-    description: "The Made by Lilly journal: how to care for hand-crocheted wool, ways to wear shawls and oversized scarves, and notes on slow, handmade making.",
+    description: "The Handmade by Lilly journal: how to care for hand-crocheted wool, ways to wear shawls and oversized scarves, and notes on slow, handmade making.",
     path: "/resources/blog/",
     active: "resources",
     body: `${pageHead({ crumbsHtml: c.html, eyebrow: "Journal", title: `Notes from <em>the studio.</em>`, lede: "Care, styling and the slow business of making things by hand." })}
 <section class="post-grid">${lead ? card(lead, "post-card--lead") : ""}${rest.map((b) => card(b)).join("")}</section>`,
-    jsonLd: [c.ld, { "@type": "Blog", name: "Made by Lilly Journal", url: abs("/resources/blog/") }],
+    jsonLd: [c.ld, { "@type": "Blog", name: "Handmade by Lilly Journal", url: abs("/resources/blog/") }],
   }));
   for (const b of blog) {
     const pc = crumbs([...base, { label: b.title, href: `/resources/blog/${b.slug}/` }]);
@@ -693,7 +707,7 @@ function guidePages() {
   const c = crumbs(base);
   write("/resources/pattern-guides/", layout({
     title: `Crochet pattern guides for beginners & improvers | ${site.name}`,
-    description: "Plain-English crochet pattern guides from Made by Lilly: how to read a pattern, UK and US stitch terms, and how to choose the right yarn for a shawl.",
+    description: "Plain-English crochet pattern guides from Handmade by Lilly: how to read a pattern, UK and US stitch terms, and how to choose the right yarn for a shawl.",
     path: "/resources/pattern-guides/",
     active: "resources",
     body: `${pageHead({ crumbsHtml: c.html, eyebrow: "Pattern guides", title: `Patterns, <em>untangled.</em>`, lede: "Clear, practical guides for the parts of crochet that trip people up." })}
@@ -794,7 +808,7 @@ function eventsPage() {
   const ld = upcoming.map((e) => ({ "@type": "Event", name: e.title, startDate: e.date, location: { "@type": "Place", name: e.location, address: e.location }, eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode", organizer: { "@type": "Organization", name: site.name, url: abs("/") } }));
   write("/resources/events/", layout({
     title: `Events: craft fairs, markets & workshops | ${site.name}`,
-    description: "Where to find Made by Lilly in person: upcoming craft fairs, makers' markets and crochet workshops in the UK, with dates, locations and what to expect.",
+    description: "Where to find Handmade by Lilly in person: upcoming craft fairs, makers' markets and crochet workshops in the UK, with dates, locations and what to expect.",
     path: "/resources/events/",
     active: "resources",
     body: `${pageHead({ crumbsHtml: c.html, eyebrow: "Events", title: `Come and see <em>in person.</em>`, lede: "Crochet is best understood up close. Here's where you can find the pieces, and me." })}
@@ -827,7 +841,7 @@ ${pageHead({ crumbsHtml: c.html, eyebrow: "Contact", title: `Say <em>hello.</em>
 </section>`;
   write("/contact/", layout({
     title: `Contact Lilly: questions, gifts & orders | ${site.name}`,
-    description: "Get in touch with Made by Lilly by email about a piece, a gift or an order, and find answers to common questions on delivery, returns and caring for crochet.",
+    description: "Get in touch with Handmade by Lilly by email about a piece, a gift or an order, and find answers to common questions on delivery, returns and caring for crochet.",
     path: "/contact/",
     active: "contact",
     body,
@@ -853,11 +867,11 @@ function legal() {
     p: "/terms-of-sale/",
     title: "Terms of sale",
     metaTitle: `Terms of sale, delivery & returns | ${site.name}`,
-    description: "Made by Lilly terms of sale: free UK delivery, prices without VAT, secure Stripe checkout, your 14-day right to cancel and free returns on ready-made pieces.",
+    description: "Handmade by Lilly terms of sale: free UK delivery, prices without VAT, secure Stripe checkout, your 14-day right to cancel and free returns on ready-made pieces.",
     sections: [
-      { id: "about", h: "Who you're buying from", html: `<p>You're buying from Made by Lilly, a small handmade crochet business based in the UK. You can reach me at ${email}.</p>` },
+      { id: "about", h: "Who you're buying from", html: `<p>You're buying from Handmade by Lilly, a small handmade crochet business based in the UK. You can reach me at ${email}.</p>` },
       { id: "pieces", h: "The pieces", html: `<p>Every piece is handmade and ready-made: it's finished before it's listed, and there is only one of each. Because each piece is made by hand, small variations in stitch and tension are part of its character. Photos are as accurate as I can make them, but colours can look slightly different on different screens.</p>` },
-      { id: "prices", h: "Prices and payment", html: `<p>Prices are in pounds sterling and are the full price you pay. UK delivery is included. Made by Lilly is not VAT-registered, so no VAT is charged.</p><p>Payment is taken by Stripe at checkout. Your order is confirmed when payment succeeds and you receive an email receipt. If a piece sells in person before your online order is processed, I'll let you know straight away and refund you in full.</p>` },
+      { id: "prices", h: "Prices and payment", html: `<p>Prices are in pounds sterling and are the full price you pay. UK delivery is included. Handmade by Lilly is not VAT-registered, so no VAT is charged.</p><p>Payment is taken by Stripe at checkout. Your order is confirmed when payment succeeds and you receive an email receipt. If a piece sells in person before your online order is processed, I'll let you know straight away and refund you in full.</p>` },
       { id: "delivery", h: "Delivery", html: `<p>I deliver to UK addresses only. Delivery is free, and orders are dispatched ${site.dispatch}. If anything is going to delay your order, I'll email you.</p>` },
       { id: "returns", h: "Your right to cancel and returns", html: `<p>You can change your mind about any piece. You have <strong>14 days from the day you receive it</strong> to tell me you want to cancel, without giving a reason.</p><ol><li>Email me at ${email} to let me know.</li><li>I'll arrange the return postage. <strong>Returns are free: I pay for the return postage.</strong></li><li>Send the piece back within 14 days of telling me. Please return it unworn and in the condition you received it.</li><li>I refund you in full, to your original payment method, within 14 days of the piece arriving back with me.</li></ol><p>If a returned piece has been worn or damaged beyond what's needed to look at it and try it on, I may reduce the refund to reflect that.</p>` },
       { id: "faulty", h: "If something is wrong", html: `<p>If a piece arrives damaged or faulty, please email me as soon as you can. Your legal rights under the Consumer Rights Act 2015 apply, and they're in addition to your right to cancel above.</p>` },
@@ -871,9 +885,9 @@ function legal() {
     p: "/privacy/",
     title: "Privacy policy",
     metaTitle: `Privacy policy | ${site.name}`,
-    description: "How Made by Lilly collects, uses and protects your personal data under UK GDPR: orders through Stripe, emails, analytics consent, retention and your rights.",
+    description: "How Handmade by Lilly collects, uses and protects your personal data under UK GDPR: orders through Stripe, emails, analytics consent, retention and your rights.",
     sections: [
-      { id: "who", h: "Who I am", html: `<p>Made by Lilly is a small handmade business in the UK and is the controller of the personal data described here. You can contact me about anything in this policy at ${email}.</p>` },
+      { id: "who", h: "Who I am", html: `<p>Handmade by Lilly is a small handmade business in the UK and is the controller of the personal data described here. You can contact me about anything in this policy at ${email}.</p>` },
       { id: "what", h: "What I collect and why", html: `<ul><li><strong>Orders.</strong> When you buy, Stripe collects your name, email, delivery address and payment details so the payment can be taken and the piece delivered. I receive your name, email and delivery address to post your order. I never see or store your card details. The legal basis is contract: I need this to fulfil your order.</li><li><strong>Emails.</strong> If you email me, I receive your email address and anything you choose to include, so I can reply. The legal basis is my legitimate interest in answering your question, or contract if it's about an order.</li></ul><h3>Analytics</h3>${analytics}` },
       { id: "who-else", h: "Who else handles your data", html: `<ul><li><strong>Stripe</strong> processes payments. Stripe is an independent controller for payment data, and its own privacy policy applies.</li><li><strong>Microsoft</strong> hosts my email (Outlook).</li>${site.ga4Id ? "<li><strong>Google</strong> provides Google Analytics, only if you consent.</li>" : ""}<li><strong>GitHub</strong> hosts this website. Like any web host, it may process technical data such as your IP address to deliver pages securely.</li><li><strong>Royal Mail or another UK courier</strong> receives your name and address to deliver your order.</li></ul><p>I never sell your data, and I don't use it for marketing unless you've asked me to.</p>` },
       { id: "keep", h: "How long I keep it", html: `<p>I keep order details and email correspondence for ${site.dataRetention}, then delete them. Stripe keeps its own payment records as required by financial regulations.</p>` },
@@ -885,7 +899,7 @@ function legal() {
     p: "/cookies/",
     title: "Cookie policy",
     metaTitle: `Cookie policy | ${site.name}`,
-    description: "Which cookies the Made by Lilly website uses, why, and how to control them, including how Google Analytics runs only after you have given consent.",
+    description: "Which cookies the Handmade by Lilly website uses, why, and how to control them, including how Google Analytics runs only after you have given consent.",
     sections: site.ga4Id
       ? [
           { id: "summary", h: "In short", html: `<p>This site only sets analytics cookies if you say yes. Nothing is tracked before you choose, and you can change your mind at any time using "Cookie settings" at the bottom of every page.</p>` },
@@ -904,7 +918,7 @@ function legal() {
 function notFound() {
   write("/404.html", layout({
     title: `Page not found | ${site.name}`,
-    description: "This page has unravelled. Head back to the Made by Lilly shop, journal or home page to find hand-crocheted shawls and oversized scarves.",
+    description: "This page has unravelled. Head back to the Handmade by Lilly shop, journal or home page to find hand-crocheted shawls and oversized scarves.",
     path: "/404.html",
     body: `<section class="lost">
   <p class="eyebrow">Error 404</p>

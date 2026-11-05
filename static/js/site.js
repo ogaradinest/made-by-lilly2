@@ -1,4 +1,4 @@
-// Made by Lilly — progressive enhancement. The site works fully without this file.
+// Handmade by Lilly — progressive enhancement. The site works fully without this file.
 (() => {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -64,6 +64,32 @@
       if (e.key === "Escape" && !menu.hidden) { setOpen(false); toggle.focus(); }
     });
     window.matchMedia("(min-width: 901px)").addEventListener("change", (m) => { if (m.matches) setOpen(false); });
+  }
+
+  // Shop category filter. Without JavaScript every piece simply shows and the dropdown stays hidden.
+  const filter = document.querySelector("[data-shop-filter]");
+  if (filter) {
+    const select = filter.querySelector("select");
+    const grid = document.querySelector("[data-shop-grid]");
+    const pieces = [...grid.querySelectorAll(".piece")];
+    const status = filter.querySelector("[data-shop-status]");
+    const apply = (cat, announce) => {
+      let shown = 0;
+      pieces.forEach((p) => {
+        const match = !cat || p.dataset.category === cat;
+        p.hidden = !match;
+        if (match) { shown++; p.classList.add("is-in"); }
+      });
+      if (announce) status.textContent = `Showing ${shown} ${shown === 1 ? "piece" : "pieces"}${cat ? " in " + cat : ""}.`;
+      const u = new URL(location.href);
+      if (cat) u.searchParams.set("category", cat); else u.searchParams.delete("category");
+      history.replaceState(null, "", u);
+    };
+    const initial = new URLSearchParams(location.search).get("category") || "";
+    if ([...select.options].some((o) => o.value === initial)) select.value = initial;
+    filter.hidden = false;
+    apply(select.value, false);
+    select.addEventListener("change", () => apply(select.value, true));
   }
 
   // Keep only one FAQ answer open at a time.

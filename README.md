@@ -1,6 +1,6 @@
-# Made by Lilly
+# Handmade by Lilly
 
-Website for Made by Lilly, hand-crocheted shawls and oversized scarves.
+Website for Handmade by Lilly, hand-crocheted shawls and oversized scarves.
 Live at <https://ogaradinest.github.io/made-by-lilly2/>.
 
 The site is plain static HTML, generated from simple content files by `build.mjs`
@@ -28,11 +28,18 @@ The product page swaps the Buy button for an "in the archive" note, and the
 piece moves to the end of the shop. Also switch off the matching Stripe
 Payment Link in Stripe, otherwise the direct link still takes payments.
 
-**Add a product:** add an entry to `content/products.json`, a stock line to
-`content/stock.json`, and photos to `static/images/` named `<name>-1536.jpg`
-(large) and `<name>-768.jpg` (small). The file names without the size suffix go
-in the product's `image` field. A product with no `stripe` link gets an
-"Email to buy" button instead.
+**Add a product:** add an entry to `content/products.json` (copy an existing
+one: `name`, `subtitle`, `category`, `price`, `cardLine`, `cardFacts`,
+`metaDescription`, `images`, `description`, `details`, `care`, `closing`,
+optional `stripe` and `instagram`), plus a stock line in `content/stock.json`.
+Photos go in `static/images/` named `<name>-<width>.jpg` (e.g.
+`granite-crochet-shawl-flat-lay-1170.jpg` and `...-768.jpg`); the first image
+is the shop card photo. Photos are always shown whole, never cropped. A new
+`category` automatically appears in the shop filter. A product with no
+`stripe` link gets a "Buy" button that opens an email to Lilly instead.
+
+**Draft products:** add `"draft": true` to keep a product in the file but off
+the site (Misty Woodland is waiting on its details). Delete that line to publish.
 
 **Add a journal post:** add `content/blog/<url-slug>.md`:
 

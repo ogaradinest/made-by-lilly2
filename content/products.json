@@ -1,70 +1,355 @@
 [
   {
-    "slug": "plum-orchard-shawl",
-    "name": "Plum Orchard Shawl",
-    "type": "Shawl",
-    "price": 185,
-    "material": "Wool blend",
-    "colour": "Plum, coral & saffron",
-    "care": "Gentle hand wash in cool water, then dry flat.",
-    "image": "plum-orchard-shawl",
-    "alt": "Plum Orchard Shawl, a triangular hand-crocheted shawl fading from deep plum through coral to saffron, draped over a linen armchair",
-    "summary": "Deep plum melting into coral and saffron, like the last warm hour of an orchard evening.",
-    "description": [
-      "The Plum Orchard Shawl starts in a deep, inky plum at its neckline and warms, row by row, into coral and then saffron at its edge. The open mesh keeps it light enough to wear indoors, while the wool blend holds the warmth on cooler evenings.",
-      "It is finished with a firm picot-style border in plum, so the colour story closes where it began. Wear it wrapped at the throat like a scarf, or let the point fall down your back over a simple dress."
-    ],
-    "stripe": "https://buy.stripe.com/5kQcMYaOAc6V0wl7VJbjW06"
-  },
-  {
-    "slug": "cloverline-alignment-shawl",
-    "name": "Cloverline Alignment Shawl",
-    "type": "Shawl",
-    "price": 135,
-    "material": "Wool blend",
-    "colour": "Natural silver grey",
-    "size": "Approx. 200 × 50 cm",
-    "care": "Gentle hand wash and dry flat.",
-    "image": "cloverline-alignment-shawl",
-    "alt": "Cloverline Alignment Shawl, a long rectangular crochet shawl in natural silver-grey wool with rows of clover-shaped stitches, draped over a garden chair in sunlight",
-    "summary": "Quiet silver-grey, sculpted with rows of tiny clovers. The one you will reach for every day.",
-    "description": [
-      "A generous rectangular shawl worked in the alignment shamrocks stitch: repeating clover forms create a gentle, sculpted texture across its natural silver-grey surface.",
-      "At roughly two metres long, it is long enough to wrap twice around the shoulders or loop loosely as an oversized scarf. The neutral colour sits happily with almost anything in your wardrobe."
-    ],
-    "instagram": "https://www.instagram.com/reel/DbQWJsKMMc0/",
-    "stripe": "https://buy.stripe.com/8x2cMY5ug0od4MBfobbjW07"
-  },
-  {
-    "slug": "sunlit-hearth-scarf",
-    "name": "Sunlit Hearth Scarf",
-    "type": "Oversized scarf",
+    "slug": "autumn",
+    "name": "Autumn",
+    "subtitle": "Oversized Handmade Crochet Shawl",
+    "category": "Shawls",
     "price": 145,
-    "material": "Wool blend",
-    "colour": "Saffron, moss & plum",
-    "care": "Gentle hand wash in cool water, then dry flat.",
-    "image": "sunlit-hearth-scarf",
-    "alt": "Sunlit Hearth Scarf, an oversized crochet scarf in stripes of saffron, moss green, coral and plum, folded on a linen cloth on a wooden table",
-    "summary": "Saffron, moss and plum in chunky open stripes. Made for wrapping, looping and layering.",
+    "cardLine": "Designed to wrap you in warmth and effortless elegance.",
+    "cardFacts": "50% wool · 200 cm wingspan",
+    "metaDescription": "Oversized handmade crochet shawl in rust, cream, brown and black. 50% wool blend, 200 cm wingspan. A one-of-a-kind piece by Handmade by Lilly.",
+    "images": [
+      { "file": "autumn-crochet-shawl-flat-lay", "alt": "Autumn triangular crochet shawl laid flat on a wooden floor, with V-shaped stripes of cream, rust and dark brown." },
+      { "file": "autumn-crochet-shawl-styled", "alt": "Autumn crochet shawl in rust, cream and dark brown stripes wrapped around a mannequin, with close-ups of the bobble-stitch bands." }
+    ],
     "description": [
-      "The Sunlit Hearth Scarf is long and generous, built from bands of saffron, moss green, coral and plum. The stripes alternate between solid rows and open windows, so the fabric has real texture when it drapes.",
-      "It is longer and narrower than a shawl, so it wraps and loops easily over a winter coat, and it is warm enough to be the one colourful thing you wear all season."
-    ]
+      "An oversized handmade crochet shawl, designed to wrap you in warmth and effortless elegance.",
+      "Inspired by the rich, earthy colours of autumn, this beautifully handcrafted triangular shawl features a striking combination of rust, cream, brown and black tones.",
+      "Made with a dense, textured crochet pattern, Autumn offers the luxurious comfort of a cosy blanket with the elegance of a statement accessory.",
+      "Its generous 2-metre wingspan makes it perfect for wrapping around your shoulders on chilly days, layering over winter outfits or snuggling up on a cold evening.",
+      "Each stitch is carefully worked by hand, creating a unique piece that celebrates slow fashion, craftsmanship and timeless comfort.",
+      "Lovingly created over approximately 10 hours, Autumn reflects the patience, care and attention that go into every handmade stitch."
+    ],
+    "details": [
+      ["Colour", "Rust, cream, brown and black"],
+      ["Material", "50% wool, 50% acrylic fibres"],
+      ["Wingspan", "200 cm"],
+      ["Drop", "110 cm"],
+      ["Shape", "Oversized triangular shawl"],
+      ["Texture", "Thick, dense crochet"],
+      ["Season", "Autumn / Winter"],
+      ["Made in", "Approximately 10 hours"],
+      ["Craftsmanship", "Individually crocheted with care"]
+    ],
+    "care": "Hand wash gently in cool water using a wool-friendly detergent. Do not wring or tumble dry. Reshape and lay flat to dry.",
+    "closing": "More than a shawl, it's a warm embrace you can wear."
   },
   {
-    "slug": "coral-tide-shawl",
-    "name": "Coral Tide Shawl",
-    "type": "Shawl",
-    "price": 210,
-    "material": "Fine wool blend",
-    "colour": "Coral, oat & plum",
-    "care": "Gentle hand wash in cool water, then dry flat.",
-    "image": "lilly-hero",
-    "alt": "Coral Tide Shawl, a large triangular hand-crocheted shawl in plum with bands of coral and saffron, worn over a cream linen dress",
-    "summary": "A large triangle in plum with rippling bands of coral and gold. Now in the archive.",
+    "slug": "sand-dune",
+    "name": "Sand Dune",
+    "subtitle": "Handmade Crochet Fan Stitch Shawl",
+    "category": "Shawls",
+    "price": 135,
+    "cardLine": "Natural elegance, delicate texture and timeless comfort.",
+    "cardFacts": "50% wool · 200 cm wingspan",
+    "metaDescription": "Oversized handmade crochet shawl in natural beige with a fan stitch pattern and scalloped edges. 50% wool, 200 cm wingspan. One of a kind.",
+    "images": [
+      { "file": "sand-dune-crochet-shawl-flat-lay", "alt": "Sand Dune beige crochet shawl laid flat on a wooden table, showing rows of fan stitches and a scalloped edge." },
+      { "file": "sand-dune-crochet-shawl-styled", "alt": "Sand Dune beige fan-stitch crochet shawl draped over a mannequin, with a close-up of the scalloped lace pattern." }
+    ],
     "description": [
-      "The Coral Tide Shawl was a large triangular piece, generous enough to cowl at the neck and still reach the elbows. Bands of coral and gold ripple through a plum ground, finished with a lacy scalloped edge.",
-      "This piece has found its home. It stays here in the archive as a record of the work."
-    ]
+      "Inspired by the soft, warm tones of sandy landscapes, Sand Dune is a beautifully handcrafted, oversized triangular shawl that combines effortless elegance with everyday comfort.",
+      "Featuring an intricate fan stitch pattern and gently scalloped edges, this shawl has a graceful, textured finish that makes it a lovely statement piece.",
+      "Made from a blend of 50% wool and 50% acrylic fibres, Sand Dune offers warmth and comfort while remaining versatile enough to complement a variety of outfits.",
+      "Its generous 2-metre wingspan allows it to drape beautifully over the shoulders, making it perfect for layering on cooler days, dressing up a simple outfit or wrapping yourself in a little extra warmth.",
+      "Every stitch tells a story. This unique piece was carefully handcrafted over approximately 10 hours, with attention to every detail."
+    ],
+    "details": [
+      ["Colour", "Natural beige"],
+      ["Material", "50% wool, 50% acrylic"],
+      ["Wingspan", "200 cm"],
+      ["Drop", "95 cm"],
+      ["Shape", "Oversized triangular shawl"],
+      ["Stitch", "Decorative fan pattern"],
+      ["Edging", "Delicate scalloped finish"],
+      ["Made in", "Approximately 10 hours"],
+      ["Craftsmanship", "Handmade with care"]
+    ],
+    "care": "Hand wash gently in cool water using a wool-friendly detergent. Do not wring or tumble dry. Reshape and lay flat to dry.",
+    "closing": "Each Handmade by Lilly creation is individually crocheted, celebrating the beauty of slow fashion and the uniqueness of handmade craftsmanship."
+  },
+  {
+    "slug": "sapphire-waves",
+    "name": "Sapphire Waves",
+    "subtitle": "Luxury Merino Wool Crochet Shawl",
+    "category": "Shawls",
+    "price": 145,
+    "cardLine": "Bold colour, beautiful texture and luxurious warmth.",
+    "cardFacts": "100% merino wool · 170 cm wingspan",
+    "metaDescription": "Handmade triangular shawl in royal blue 100% merino wool, with a textured shell stitch and contrasting stripes. 170 cm wingspan. One of a kind.",
+    "images": [
+      { "file": "sapphire-waves-crochet-shawl-flat-lay", "alt": "Sapphire Waves royal blue crochet shawl laid flat on a wooden table, with two pale contrasting V-shaped stripes." },
+      { "file": "sapphire-waves-crochet-shawl-styled", "alt": "Sapphire Waves royal blue shell-stitch shawl with pale stripes wrapped around a mannequin, with a close-up of the stitch texture." }
+    ],
+    "description": [
+      "Inspired by the rich blue tones of the ocean, Sapphire Waves is a beautifully handcrafted triangular shawl that combines vibrant colour with exceptional warmth and comfort.",
+      "Crocheted from 100% merino wool, this thick, cosy shawl features an intricate shell stitch pattern, creating a wonderfully textured finish. The striking royal blue is complemented by contrasting silver-grey stripes, giving the design a distinctive, contemporary look.",
+      "With a generous 170 cm wingspan, Sapphire Waves drapes beautifully over the shoulders, offering a snug and stylish layer for colder days. Its substantial texture makes it perfect for autumn and winter, whether worn over a coat, styled with a favourite outfit or wrapped around you for extra warmth.",
+      "Each stitch is carefully worked by hand, making this shawl a unique celebration of craftsmanship, comfort and individuality.",
+      "Eight hours of careful crochet work bring Sapphire Waves to life, transforming luxurious merino wool into a beautifully textured, one-of-a-kind shawl."
+    ],
+    "details": [
+      ["Colour", "Royal blue with silver-grey stripes"],
+      ["Material", "100% merino wool"],
+      ["Wingspan", "170 cm"],
+      ["Drop", "75 cm"],
+      ["Shape", "Triangular shawl"],
+      ["Stitch", "Textured shell stitch"],
+      ["Texture", "Very thick, cosy and warm"],
+      ["Season", "Autumn / Winter"],
+      ["Made in", "Approximately 8 hours"],
+      ["Craftsmanship", "Handmade with care"]
+    ],
+    "care": "Gently hand wash in cool water using a wool-friendly detergent. Do not wring or tumble dry. Reshape and lay flat to dry.",
+    "closing": "Wrap yourself in the warmth of merino wool and the beauty of handmade craftsmanship."
+  },
+  {
+    "slug": "granite",
+    "name": "Granite",
+    "subtitle": "Textured Handmade Crochet Shawl",
+    "category": "Shawls",
+    "price": 135,
+    "cardLine": "Understated elegance, beautiful texture and effortless comfort.",
+    "cardFacts": "40% wool blend · 220 cm wingspan",
+    "metaDescription": "Oversized handmade crochet shawl in granite grey, with shell stitches and textured ridges. Soft wool blend, 220 cm wingspan. One of a kind.",
+    "images": [
+      { "file": "granite-crochet-shawl-flat-lay", "alt": "Granite grey crochet shawl laid flat on a wooden table, showing ribbed textured rows and a pointed triangle shape." },
+      { "file": "granite-crochet-shawl-styled", "alt": "Granite tweed-grey crochet shawl draped over a mannequin in several ways, with a close-up of the textured stitches." }
+    ],
+    "description": [
+      "Inspired by the natural beauty and timeless strength of stone, Granite is a beautifully handcrafted oversized triangular shawl that brings together sophisticated style, softness and comfort.",
+      "Featuring a combination of decorative shell stitches and textured ridges, this shawl creates a rich, dimensional pattern that adds character without overwhelming its simple elegance.",
+      "Crocheted in a versatile granite-grey shade using a soft blend of 40% wool and viscose-mix fibres, it offers a lovely balance of warmth, texture and drape.",
+      "With an impressive 220 cm wingspan, Granite wraps generously around the shoulders, while its 70 cm drop creates an elegant silhouette without excessive bulk.",
+      "Perfect for layering over everyday outfits, adding a refined finishing touch to an evening look or keeping comfortably warm on cooler days.",
+      "Each piece is individually handcrafted with care, celebrating the beauty of slow fashion and timeless design.",
+      "Every stitch tells a story. This unique piece was carefully handcrafted over approximately 10 hours, with attention to every detail."
+    ],
+    "details": [
+      ["Colour", "Granite grey"],
+      ["Material", "40% wool, blended with viscose and other fibres"],
+      ["Wingspan", "220 cm"],
+      ["Drop", "70 cm"],
+      ["Shape", "Oversized triangular shawl"],
+      ["Pattern", "Decorative shells and textured ridges"],
+      ["Texture", "Soft, textured and beautifully draping"],
+      ["Style", "Contemporary, elegant and versatile"],
+      ["Made in", "Approximately 10 hours"],
+      ["Craftsmanship", "Handmade with care"]
+    ],
+    "care": "Gently hand wash in cool water using a wool-friendly detergent. Avoid wringing or tumble drying. Reshape and lay flat to dry.",
+    "closing": "Inspired by nature, created with patience, and designed to be worn and treasured."
+  },
+  {
+    "slug": "willow-mist",
+    "name": "Willow Mist",
+    "subtitle": "Handmade Lace Crochet Shawl",
+    "category": "Shawls",
+    "price": 125,
+    "cardLine": "Inspired by nature, crafted with care, designed to be treasured.",
+    "cardFacts": "60% wool · 170 cm wingspan",
+    "metaDescription": "Handmade lace crochet shawl in fresh leafy green, with openwork lace and bobble edging. 60% wool, 170 cm wingspan. One of a kind.",
+    "images": [
+      { "file": "willow-mist-crochet-shawl-flat-lay", "alt": "Willow Mist green lace crochet shawl laid flat on a wooden floor, showing openwork lace and a bobble-trimmed edge." },
+      { "file": "willow-mist-crochet-shawl-styled", "alt": "Willow Mist green lace shawl draped over a mannequin outdoors in front of a hedge, shown from four angles." }
+    ],
+    "description": [
+      "Delicate in appearance yet wonderfully warm, Willow Mist is a beautifully handcrafted triangular shawl inspired by the fresh green tones and gentle textures of nature.",
+      "Featuring an intricate openwork lace pattern, this shawl combines graceful detailing with the comforting warmth of a thick wool-blend fabric. Its distinctive decorative bobble edging adds a playful, textured finish, giving the design character and individuality.",
+      "Made from a blend of 60% wool and 40% mixed fibres, Willow Mist offers a lovely combination of warmth, softness and structure.",
+      "With a generous 170 cm wingspan and 80 cm drop, it drapes comfortably over the shoulders, making it a beautiful accessory for cooler days, countryside walks or simply adding a touch of natural elegance to an everyday outfit.",
+      "Each stitch is carefully worked by hand, celebrating traditional crochet craftsmanship and the beauty of slow fashion.",
+      "Every stitch tells a story. This unique piece was carefully handcrafted over approximately 9 hours, with attention to every detail."
+    ],
+    "details": [
+      ["Colour", "Fresh leafy green"],
+      ["Material", "60% wool, 40% mixed fibres"],
+      ["Wingspan", "170 cm"],
+      ["Drop", "80 cm"],
+      ["Shape", "Triangular shawl"],
+      ["Pattern", "Intricate openwork lace"],
+      ["Edging", "Decorative textured bobbles"],
+      ["Texture", "Thick, warm and beautifully detailed"],
+      ["Style", "Nature-inspired, feminine and timeless"],
+      ["Made in", "Approximately 9 hours"],
+      ["Craftsmanship", "Handmade with care"]
+    ],
+    "care": "Gently hand wash in cool water using a wool-friendly detergent. Do not wring or tumble dry. Reshape carefully and lay flat to dry to preserve the delicate lacework and decorative edging.",
+    "closing": "The beauty of nature captured one stitch at a time."
+  },
+  {
+    "slug": "lavender",
+    "name": "Lavender",
+    "subtitle": "Luxury Cashmere Lace Scarf",
+    "category": "Scarves",
+    "price": 95,
+    "cardLine": "Delicate as a whisper, soft as a dream.",
+    "cardFacts": "100% cashmere · 100 cm wingspan",
+    "metaDescription": "Handmade triangular lace scarf in soft lavender, crocheted from 100% cashmere. Lightweight and gently draping, 100 cm wingspan. One of a kind.",
+    "images": [
+      { "file": "lavender-crochet-scarf-flat-lay", "alt": "Lavender cashmere lace scarf laid flat on a wooden table, a small triangle with a delicate openwork pattern." },
+      { "file": "lavender-crochet-scarf-styled", "alt": "Lavender cashmere lace scarf draped around the neck of a mannequin, with a close-up of the lace stitches." }
+    ],
+    "description": [
+      "Elegant, lightweight and beautifully soft, Lavender is a handcrafted crochet scarf made from 100% cashmere, bringing together luxurious natural fibres and delicate craftsmanship.",
+      "Crocheted in a gentle lavender shade, this charming triangular scarf features an intricate lace pattern that creates beautiful texture while maintaining a soft, graceful drape.",
+      "Its compact design makes it wonderfully versatile. Wear it loosely around your neck, drape it over your shoulders or style it as a delicate neckerchief to add a subtle touch of colour and elegance to your outfit.",
+      "Cashmere is treasured for its exceptional softness, natural warmth and luxurious feel, making Lavender a lovely accessory for both everyday wear and special occasions.",
+      "Lovingly crocheted by hand, this scarf celebrates the beauty of simplicity, fine fibres and timeless style. Every stitch tells a story. This unique piece was carefully handcrafted over approximately 7 hours, with attention to every detail."
+    ],
+    "details": [
+      ["Colour", "Soft lavender / lilac"],
+      ["Material", "100% cashmere"],
+      ["Wingspan", "100 cm"],
+      ["Drop", "40 cm"],
+      ["Shape", "Small triangular scarf"],
+      ["Pattern", "Delicate textured lace crochet"],
+      ["Texture", "Soft, lightweight and gently draping"],
+      ["Style", "Elegant, feminine and versatile"],
+      ["Made in", "Approximately 7 hours"],
+      ["Craftsmanship", "Handmade with care"]
+    ],
+    "care": "Gently hand wash in cool water using a specialist cashmere or wool detergent. Avoid rubbing, wringing or tumble drying. Reshape and lay flat to dry, away from direct heat.",
+    "closing": "Luxury doesn't need to be loud. Sometimes, it's simply the softness of cashmere against your skin."
+  },
+  {
+    "slug": "golden-harvest",
+    "name": "Golden Harvest",
+    "subtitle": "Handmade Lace Crochet Shawl",
+    "category": "Shawls",
+    "price": 145,
+    "cardLine": "Golden warmth, intricate details and timeless handmade beauty.",
+    "cardFacts": "60% wool · 170 cm wingspan",
+    "metaDescription": "Handmade lace crochet shawl in mustard gold, with openwork lace and bobble edging. 60% wool, 170 cm wingspan. One of a kind.",
+    "images": [
+      { "file": "golden-harvest-crochet-shawl-flat-lay", "alt": "Golden Harvest mustard-gold lace crochet shawl laid flat on a wooden table, with a bobble-trimmed edge." },
+      { "file": "golden-harvest-crochet-shawl-styled", "alt": "Golden Harvest mustard-gold lace shawl wrapped around a mannequin, with a close-up of the openwork stitches." }
+    ],
+    "description": [
+      "Inspired by the golden tones of autumn fields and the warmth of the harvest season, Golden Harvest is a beautifully handcrafted triangular shawl that brings together rich colour, delicate lacework and cosy comfort.",
+      "Crocheted in a vibrant mustard-gold shade, this shawl features an intricate openwork lace pattern with decorative textured edging, creating a beautiful balance between traditional craftsmanship and contemporary style.",
+      "Made from a blend of 60% wool and 40% mixed fibres, Golden Harvest offers substantial warmth while maintaining the decorative beauty of its lace design.",
+      "With a generous 170 cm wingspan and 80 cm drop, it drapes comfortably over the shoulders, making it perfect for layering over everyday outfits, adding a cheerful splash of colour to neutral clothing or wrapping up on cooler days.",
+      "Each stitch is lovingly worked by hand, making this shawl a distinctive piece that celebrates individuality, creativity and slow fashion.",
+      "Every stitch tells a story. This unique piece was carefully handcrafted over approximately 9 hours, with attention to every detail."
+    ],
+    "details": [
+      ["Colour", "Mustard gold"],
+      ["Material", "60% wool, 40% mixed fibres"],
+      ["Wingspan", "170 cm"],
+      ["Drop", "80 cm"],
+      ["Shape", "Triangular shawl"],
+      ["Pattern", "Decorative openwork lace"],
+      ["Edging", "Intricate textured bobble detailing"],
+      ["Texture", "Thick, warm and beautifully detailed"],
+      ["Style", "Rustic elegance, nature-inspired"],
+      ["Made in", "Approximately 9 hours"],
+      ["Craftsmanship", "Handmade with care"]
+    ],
+    "care": "Gently hand wash in cool water using a wool-friendly detergent. Avoid wringing or tumble drying. Reshape carefully and lay flat to dry to preserve the lacework and decorative edging.",
+    "closing": "Like a little piece of autumn sunshine, lovingly captured one stitch at a time."
+  },
+  {
+    "slug": "fuchsia-bloom",
+    "name": "Fuchsia Bloom",
+    "subtitle": "Handmade C2C Crochet Shawl",
+    "category": "Shawls",
+    "price": 110,
+    "cardLine": "Bold colour, cosy texture and a little joy in every stitch.",
+    "cardFacts": "100% acrylic (wool-free) · 170 cm wingspan",
+    "metaDescription": "Handmade corner-to-corner crochet shawl in vibrant fuchsia pink. Wool-free 100% acrylic, thick and cosy, 170 cm wingspan. One of a kind.",
+    "images": [
+      { "file": "fuchsia-bloom-crochet-shawl-flat-lay", "alt": "Fuchsia Bloom bright pink crochet shawl laid flat on a wooden table, showing its diagonal corner-to-corner texture." },
+      { "file": "fuchsia-bloom-crochet-shawl-styled", "alt": "Fuchsia Bloom pink crochet shawl worn on a mannequin as an open wrap and wrapped around the neck, with close-ups of the texture." }
+    ],
+    "description": [
+      "Bright, beautiful and wonderfully cosy, Fuchsia Bloom is a handcrafted triangular shawl designed to bring warmth, comfort and a cheerful splash of colour to your wardrobe.",
+      "Crocheted in a vibrant fuchsia-pink shade, this shawl features the classic corner-to-corner (C2C) crochet technique, creating a beautifully textured fabric with a distinctive diagonal pattern.",
+      "Made from 100% acrylic yarn, Fuchsia Bloom is thick, warm and comfortable, offering a wool-free alternative for those who prefer synthetic fibres.",
+      "With its generous 170 cm wingspan and 80 cm drop, this shawl wraps comfortably around the shoulders and can be styled in different ways — draped loosely as a wrap, layered over a favourite outfit or wrapped snugly around the neck on chilly days.",
+      "Its bold colour and cosy texture make it a striking statement accessory, perfect for adding personality to everyday outfits.",
+      "Individually crocheted with care, Fuchsia Bloom celebrates the beauty of handmade craftsmanship and the joy of wearing something unique.",
+      "Every stitch tells a story. This unique piece was carefully handcrafted over approximately 10 hours, with attention to every detail."
+    ],
+    "details": [
+      ["Colour", "Vibrant fuchsia pink"],
+      ["Material", "100% acrylic"],
+      ["Wingspan", "170 cm"],
+      ["Drop", "80 cm"],
+      ["Shape", "Triangular shawl"],
+      ["Pattern", "Corner-to-corner (C2C) crochet"],
+      ["Texture", "Thick, textured and cosy"],
+      ["Style", "Contemporary, colourful and versatile"],
+      ["Made in", "Approximately 10 hours"],
+      ["Craftsmanship", "Handmade with care"]
+    ],
+    "care": "Gently wash in cool water using a mild detergent. Avoid high temperatures, bleach and tumble drying. Reshape and lay flat to dry to preserve the shawl's texture and shape.",
+    "closing": "Because sometimes, all an outfit needs is a little colour and a lot of handmade love."
+  },
+  {
+    "slug": "shamrock-grace",
+    "name": "Shamrock Grace",
+    "subtitle": "Handmade Wool-Blend Crochet Wrap",
+    "category": "Wraps",
+    "price": 125,
+    "cardLine": "Timeless elegance, delicate texture and warmth in every stitch.",
+    "cardFacts": "70% wool · 200 × 45 cm",
+    "metaDescription": "Handmade rectangular crochet wrap with an aligned shamrock stitch, in a soft neutral shade. 70% wool blend, 200 × 45 cm. One of a kind.",
+    "images": [
+      { "file": "shamrock-grace-crochet-wrap-flat-lay", "alt": "Shamrock Grace rectangular crochet wrap folded on a wooden table, showing neat columns of openwork stitches." },
+      { "file": "shamrock-grace-crochet-wrap-styled", "alt": "Shamrock Grace light neutral crochet wrap draped over a mannequin and an armchair, with a close-up of the stitch pattern." }
+    ],
+    "description": [
+      "Soft, graceful and beautifully textured, Shamrock Grace is a handcrafted rectangular crochet wrap that combines traditional stitchwork with effortless everyday elegance.",
+      "Featuring an intricate aligned shamrock stitch pattern, this wrap showcases a delicate arrangement of decorative motifs, creating an eye-catching texture with a classic, romantic feel.",
+      "Crocheted in a soft, neutral shade using a blend of 70% worsted wool and 30% mixed fibres, Shamrock Grace offers comforting warmth while maintaining a lovely drape.",
+      "With its generous 200 cm length and 45 cm width, this versatile piece can be draped elegantly over the shoulders, wrapped around the neck as an oversized scarf or styled as a cosy layer over a favourite outfit.",
+      "Its understated colour and detailed craftsmanship make it a beautiful accessory for both casual occasions and more elegant looks.",
+      "Every stitch tells a story. This unique piece was carefully handcrafted over approximately 10 hours, with attention to every detail.",
+      "Lovingly created by hand, Shamrock Grace celebrates the beauty of traditional crochet, thoughtful craftsmanship and slow fashion."
+    ],
+    "details": [
+      ["Colour", "Soft neutral cream"],
+      ["Material", "70% worsted wool, 30% mixed fibres"],
+      ["Length", "200 cm"],
+      ["Width", "45 cm"],
+      ["Shape", "Rectangular shawl / wrap"],
+      ["Pattern", "Aligned shamrock crochet stitch"],
+      ["Texture", "Decorative, soft and textured"],
+      ["Style", "Classic, elegant and versatile"],
+      ["Made in", "Approximately 10 hours"],
+      ["Craftsmanship", "Handmade with care"]
+    ],
+    "care": "Gently hand wash in cool water using a wool-friendly detergent. Avoid wringing, bleach and tumble drying. Reshape and lay flat to dry to preserve the stitch pattern and shape.",
+    "closing": "Gracefully simple, beautifully handmade, and designed to be treasured."
+  },
+  {
+    "slug": "misty-woodland",
+    "draft": true,
+    "_note": "DRAFT: hidden from the site until Lilly supplies price, material, wingspan, drop, hours and care. Remove \"draft\" to publish.",
+    "name": "Misty Woodland",
+    "subtitle": "Handmade Lace Crochet Shawl",
+    "category": "Shawls",
+    "price": 0,
+    "cardLine": "Soft woodland greys, airy lace and handmade warmth.",
+    "cardFacts": "TBC material · TBC wingspan",
+    "metaDescription": "Handmade triangular lace crochet shawl in soft, shifting shades of charcoal, grey, taupe and cream, with a scalloped edge. One of a kind.",
+    "images": [
+      { "file": "misty-woodland-crochet-shawl-flat-lay", "alt": "Misty Woodland triangular lace crochet shawl laid flat on wooden boards, in variegated charcoal, grey and cream." },
+      { "file": "misty-woodland-crochet-shawl-styled", "alt": "Misty Woodland grey and cream lace shawl draped over a mannequin, with close-ups of the shell-stitch pattern and pointed hem." }
+    ],
+    "description": [
+      "Inspired by the soft, shifting greys of a woodland morning, Misty Woodland is a handcrafted triangular shawl that brings together airy lacework and gentle, earthy colour.",
+      "Crocheted in a variegated yarn that drifts between charcoal, stone grey, taupe and cream, it features an openwork pattern of clustered shell stitches that forms soft V-shaped bands across the shawl, finished with a delicately scalloped edge."
+    ],
+    "details": [
+      ["Colour", "Variegated charcoal, grey, taupe and cream"],
+      ["Shape", "Triangular shawl"],
+      ["Pattern", "Openwork clustered shell lace"],
+      ["Edging", "Scalloped"],
+      ["Craftsmanship", "Handmade with care"]
+    ],
+    "care": "TBC",
+    "closing": ""
   }
 ]

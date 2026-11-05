@@ -14,4 +14,4 @@ Crochet is especially lovely because every stitch builds on the last one. A smal
 
 ## Made to be worn, not saved
 
-A Made by Lilly shawl is designed to be worn, not saved for "best". Fold it into your everyday coat, throw it over a simple dress, or keep it nearby for a cool garden evening. With gentle care, it becomes more familiar over time: a useful layer, a splash of colour and a reminder that good things do not need to be rushed.
+A Handmade by Lilly shawl is designed to be worn, not saved for "best". Fold it into your everyday coat, throw it over a simple dress, or keep it nearby for a cool garden evening. With gentle care, it becomes more familiar over time: a useful layer, a splash of colour and a reminder that good things do not need to be rushed.

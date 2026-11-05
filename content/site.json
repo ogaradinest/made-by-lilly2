@@ -1,14 +1,15 @@
 {
-  "name": "Made by Lilly",
+  "name": "Handmade by Lilly",
   "tagline": "From my hands to your heart",
-  "description": "One-of-a-kind hand-crocheted shawls and oversized scarves, made slowly by Lilly in the UK. Free UK delivery.",
+  "description": "One-of-a-kind handmade crochet shawls, wraps and scarves, made slowly by Lilly in the UK. Free UK delivery.",
   "siteUrl": "https://ogaradinest.github.io/made-by-lilly2",
   "basePath": "/made-by-lilly2",
   "email": "Handmadebylilly@outlook.com",
-  "instagram": "https://www.instagram.com/lilly_croitoru/",
-  "instagramHandle": "@lilly_croitoru",
+  "instagram": "https://www.instagram.com/handmade_by_lilly_crochet/",
+  "instagramHandle": "@handmade_by_lilly_crochet",
   "ga4Id": "",
   "dispatch": "within 3 working days",
   "dataRetention": "1 year",
-  "policyUpdated": "2026-09-25"
+  "policyUpdated": "2026-09-25",
+  "productSignOff": "Handmade by Lilly – Made uniquely, just like you."
 }
